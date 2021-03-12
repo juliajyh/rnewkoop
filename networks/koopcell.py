@@ -81,7 +81,7 @@ class IresnetBlock(nn.Module):
         # y = Fx + x
         return Fx, trace + an_logdet
 
-    def inverse(self, y, old_x, maxIter=30):
+    def inverse(self, y, old_x, maxIter=50):
         # inversion of ResNet-block (fixed-point iteration)
         y = self.outlayers(y)
         x = y + old_x

@@ -92,9 +92,9 @@ class PoseEncoder(nn.Module):
         return self.features
 
 class MyRNN(nn.Module):
-    def __init__(self, device, z):
+    def __init__(self, device, z, iresnet_itr):
         super(MyRNN, self).__init__()
-        self.cell = ConvLSTMCell(52, 52, 512, 15, 3, device, 52, z)
+        self.cell = ConvLSTMCell(104, 52, 512, 15, 3, device, 52, z, iresnet_itr=iresnet_itr)
 
     def forward(self, inputs):
         hidden = self.cell.init_hidden(inputs.size(0))
