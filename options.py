@@ -27,6 +27,7 @@ class MonodepthOptions:
                                  default=os.path.join(os.path.expanduser("~"), "tmp"))
 
         # TRAINING options
+        self.parser.add_argument("--use-rkn", type=bool, default=True)
         self.parser.add_argument("--model_name",
                                  type=str,
                                  help="the name of the folder to save the model in",
@@ -52,11 +53,11 @@ class MonodepthOptions:
         self.parser.add_argument("--height",
                                  type=int,
                                  help="input image height",
-                                 default=192)
+                                 default=128)
         self.parser.add_argument("--width",
                                  type=int,
                                  help="input image width",
-                                 default=640)
+                                 default=416)
         self.parser.add_argument("--disparity_smoothness",
                                  type=float,
                                  help="disparity smoothness weight",
@@ -145,6 +146,7 @@ class MonodepthOptions:
         # LOADING options
         self.parser.add_argument("--load_weights_folder",
                                  type=str,
+                                 # default=os.path.join('checkpoints', 'train1', 'time1', 'weights_7'),
                                  help="name of model to load")
         self.parser.add_argument("--models_to_load",
                                  nargs="+",
@@ -202,6 +204,9 @@ class MonodepthOptions:
                                  help="if set will perform the flipping post processing "
                                       "from the original monodepth paper",
                                  action="store_true")
+        self.parser.add_argument('--z', default=5.0, type=float)
+        self.parser.add_argument('--iresnet-itr', default=50, type=int)
+        self.parser.add_argument('--toy-data', default=False, type=bool)
 
     def parse(self):
         self.options = self.parser.parse_args()
